@@ -1,0 +1,23 @@
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+#    _instanceof:
+#        App\Application\CommandHandler:
+#            public: true;
+#
+    App\Application\Team\Command\CreateTeamCommandHandler:
+        public: true
+
+    App\Infrastructure\Team\Repository\InMemory\TeamRepository:
+        public: true
+
+    App\Infrastructure\Team\Repository\InMemory\TypeRepository:
+        public: true
+
+    App\Infrastructure\Common\Repository\InMemory\CountryRepository:
+        public: true

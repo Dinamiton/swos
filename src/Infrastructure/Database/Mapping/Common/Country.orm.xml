@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+    <entity name="App\Domain\Common\Country" table="country">
+        <id name="id" type="uuid" length="255"/>
+        <field name="name" type="string" length="255" />
+        <field name="code" type="string" length="36" />
+        <one-to-many field="teams" target-entity="App\Domain\Team\Team" mapped-by="countries" />
+        <many-to-one field="continent" />
+    </entity>
+</doctrine-mapping>

@@ -14,7 +14,7 @@ class TypeRepository implements TypeRepositoryInterface
         $this->types = [];
     }
 
-    public function findOneByName(string $name): ?Type
+    public function findByName(string $name): ?Type
     {
         /** @var Type $type */
         foreach ($this->types as $type) {

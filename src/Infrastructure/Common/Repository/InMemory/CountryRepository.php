@@ -14,8 +14,7 @@ class CountryRepository implements CountryRepositoryInterface
         $this->countries = [];
     }
 
-
-    public function findOneByCode(string $code): ?Country
+    public function findByCode(string $code): ?Country
     {
         /** @var Country $country */
         foreach ($this->countries as $country) {

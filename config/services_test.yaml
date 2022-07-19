@@ -9,6 +9,10 @@ services:
     App\Application\Team\Command\CreateTeamCommandHandler:
         public: true
 
+    App\Domain\Team\TeamRepository: '@App\Infrastructure\Team\Repository\Doctrine\TeamRepository'
+    App\Domain\Team\TypeRepository: '@App\Infrastructure\Team\Repository\Doctrine\TypeRepository'
+    App\Domain\Common\CountryRepository: '@App\Infrastructure\Common\Repository\Doctrine\CountryRepository'
+
     App\Infrastructure\Team\Repository\InMemory\TeamRepository:
         public: true
 

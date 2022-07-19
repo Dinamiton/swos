@@ -14,7 +14,7 @@ class TeamRepository implements TeamRepositoryInterface
         $this->teams = [];
     }
 
-    public function findOneByName(string $name): ?Team
+    public function findByName(string $name): ?Team
     {
         /** @var Team $team */
         foreach ($this->teams as $team) {

@@ -10,7 +10,6 @@ use App\Domain\Team\TeamAlreadyExistsException;
 use App\Domain\Team\TeamRepository;
 use App\Domain\Team\TypeNotFoundException;
 use App\Domain\Team\TypeRepository;
-use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CreateTeamCommandHandler implements CommandHandler
 {
@@ -35,16 +34,16 @@ class CreateTeamCommandHandler implements CommandHandler
      */
     public function __invoke(CreateTeamCommand $command): void
     {
-        if ($this->teamRepository->findOneByName($command->name())) {
+        if ($this->teamRepository->findByName($command->name())) {
             throw new TeamAlreadyExistsException();
         }
 
-        $type = $this->typeRepository->findOneByName($command->type());
+        $type = $this->typeRepository->findByName($command->type());
         if (!$type) {
             throw new TypeNotFoundException();
         }
 
-        $country = $this->countryRepository->findOneByCode($command->countryCode());
+        $country = $this->countryRepository->findByCode($command->countryCode());
         if (!$country) {
             throw new CountryNotFoundException();
         }

@@ -15,9 +15,12 @@ use App\Domain\Team\TeamRepository;
 use App\Domain\Team\TypeRepository;
 use App\Domain\Common\CountryRepository;
 use App\Domain\Team\Team;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 class TeamTest extends KernelTestCase
 {
+    use ResetDatabase;
+
     private ?object $createTeamCommandHandler;
     private ?object $typeRepository;
     private ?object $countryRepository;
@@ -25,7 +28,7 @@ class TeamTest extends KernelTestCase
 
     protected function setUp(): void
     {
-        $kernel = self::bootKernel();
+        self::bootKernel();
         $container = static::getContainer();
         $this->createTeamCommandHandler = $container->get(CreateTeamCommandHandler::class);
         $this->typeRepository = $container->get(TypeRepository::class);
@@ -48,10 +51,20 @@ class TeamTest extends KernelTestCase
 
         $this->createTeamCommandHandler->__invoke($createTeamCommand);
 
+        $createTeamCommand2 = new CreateTeamCommand(
+            'Milan',
+            $type->name(),
+            $country->Code()
+        );
+
+        $this->createTeamCommandHandler->__invoke($createTeamCommand2);
+
         /** @var Team $team */
-        $team = $this->teamRepository->findOneByName('Juventus');
+        $team = $this->teamRepository->findByName('Juventus');
+        $teams = $this->teamRepository->findAll();
 
         $this->assertEquals('Juventus', $team->name());
+        $this->assertCount(2, $teams);
     }
 
     public function testTypeNotFound()

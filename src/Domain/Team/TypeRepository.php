@@ -5,5 +5,5 @@ namespace App\Domain\Team;
 interface TypeRepository
 {
     public function save(Type $type): void;
-    public function findOneByName(string $name): ?Type;
+    public function findByName(string $name): ?Type;
 }

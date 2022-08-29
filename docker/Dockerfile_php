@@ -1,11 +1,14 @@
-FROM php:8.1.6-fpm-alpine3.15
+FROM php:8.1.6-fpm
 
 RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
-RUN set -ex \
-  && apk --no-cache add \
-    postgresql-dev
 
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+RUN apt-get update && apt-get install -y libpq-dev
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 RUN docker-php-ext-install pdo pdo_pgsql
+
 RUN composer self-update
 
 WORKDIR /app/swos

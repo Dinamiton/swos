@@ -13,14 +13,14 @@ doctrine:
             App\Domain\Team:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/Database/Mapping/Team'
+                dir: '%kernel.project_dir%/src/Infrastructure/Team/Mapping'
                 prefix: 'App\Domain\Team'
                 alias: App\Domain\Team
                 mapping: true
             App\Domain\Common:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/Database/Mapping/Common'
+                dir: '%kernel.project_dir%/src/Infrastructure/Common/Mapping'
                 prefix: 'App\Domain\Common'
                 alias: App\Domain\Common
                 mapping: true
